@@ -145,7 +145,7 @@ def atualizar_Novos_Arquivos():
     pyautogui.press('enter')    
     pyautogui.hotkey('winleft','up')
     pyautogui.hotkey('ctrl','v')
-    time.sleep(1)
+    time.sleep(10)
     pyautogui.press('enter')
     time.sleep(1)
 
