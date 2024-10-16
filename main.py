@@ -38,6 +38,33 @@ def exportar():
     except Exception as e:
         print(f"Ocorreu um erro: {e}")
 
+def exportar_Diff():
+    time.sleep(30)
+    try:
+        
+        export_button = WebDriverWait(navegador, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="ZDBExportButton"]'))
+        )
+        export_button.click()
+
+        embed_export_button = WebDriverWait(navegador, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="SumAndPvtEmbedExportXLSMenuItem"]'))
+        )
+        time.sleep(1)
+        embed_export_button.click()
+        print("Botão 'EmbedExportXLSMenuItem' clicado com sucesso!")
+        
+        final_button = WebDriverWait(navegador, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '/html/body/div[34]/div/div[2]/div/footer/div/button[1]'))
+        )
+        time.sleep(1)
+        final_button.click()
+
+        time.sleep(1)
+
+    except Exception as e:
+        print(f"Ocorreu um erro: {e}")
+
 def mudar_Link(texto,i):
     navegador.execute_script("window.open('');")
     navegador.switch_to.window(navegador.window_handles[i])
@@ -86,13 +113,13 @@ def exporta_Nomus():
     mudar_Link('https://reports.nomus.com.br/open-view/751489003501209517',19) # Familia
     exportar()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003299922759',20) # CONTROLE DA PRODUÇÃO
-    exportar()
+    exportar_Diff()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003399788047',21) # ENTRADAS (LIVRO)
-    exportar()
+    exportar_Diff()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003415814176',22) # Nfs emitidas
-    exportar()
+    exportar_Diff()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003399436517',23) # Saída 
-    exportar()
+    exportar_Diff()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003406446494',24) # Dw Compras
     exportar()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003342815143',25) # Modelo NF's 
@@ -101,7 +128,10 @@ def exporta_Nomus():
     exportar()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003432511966',27) # movimentação - pvs
     exportar()
-
+    mudar_Link('https://reports.nomus.com.br/open-view/751489003502954549',28) # Descrições
+    exportar()
+    mudar_Link('https://reports.nomus.com.br/open-view/751489003502944448',29) # Estoque - tempo real
+    exportar_Diff()
     time.sleep(60)
     navegador.quit()
 
@@ -150,8 +180,10 @@ def atualizar_Excel():
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Banco de dados\\Banco de dados - Lead.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Lead time - Familia.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Fechamento de estoque\\Monitoramento de estoque.xlsx')
-    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Controle\\Controle.xlsx')
-    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\5-PROCESSO PROJETOS\\REGISTROS\\Controle - Ass.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\Controle de inventários.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\TB-06_AvalProvedoresExternos-Rev05.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Controle\\Controle.xlsm')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\5-PROCESSO PROJETOS\\REGISTROS\\Controle - AT.xlsm')
     # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\3-GESTÃO DA QUALIDADE\\REGISTROS\\Gráficos-IDs-PCP-2024 - IDs 04a 04b 13b.xlsx')
     # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\3-GESTÃO DA QUALIDADE\\REGISTROS\\Graficos-IDs-Compras-2024 - IDs 09 13a 13c.xlsx')
 
