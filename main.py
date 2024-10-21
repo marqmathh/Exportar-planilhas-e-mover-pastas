@@ -7,6 +7,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import time
 import win32com.client
+import os
+from pywinauto.application import Application
+import ctypes
 
 pyautogui.PAUSE = 1
 
@@ -171,10 +174,6 @@ def salva_Arquivos():
 def move_Arquivos():
     caminho_Iso()
     time.sleep(0.5)
-    pyautogui.press('pgdn')
-    pyautogui.press('enter')
-    pyautogui.press('pgup')
-    pyautogui.press('enter')
     pyautogui.hotkey('ctrl','a')
     pyautogui.press('delete')
     time.sleep(0.5)
@@ -231,39 +230,25 @@ def atualizar_Planilhas(local_Planilha):
     finally:
         excel.Quit()
 
-def atualizar_Planilhas_Diff(local_Planilha):
-    excel = win32com.client.DispatchEx('Excel.Application')
-    excel.Visible = True
-
-    try:
-        wb = excel.Workbooks.Open(local_Planilha)
-        time.sleep(10)
-        pyautogui.hotkey('ctrl','alt')
-        pyautogui.press('enter')
-        time.sleep(10)
-        wb.RefreshAll()
-        excel.CalculateUntilAsyncQueriesDone()
-        wb.Close(SaveChanges=True)
-        
-    except Exception as e:
-        print(f"Erro ao abrir ou atualizar a planilha: {e}")
-
-    finally:
-        excel.Quit()
-
 def atualizar_Excel():
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Banco de dados\\Banco de dados - Lead.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Lead time - Familia.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Fechamento de estoque\\Monitoramento de estoque.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\Controle de inventários.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\TB-06_AvalProvedoresExternos-Rev05.xlsx')
-    atualizar_Planilhas_Diff('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Controle\\Controle.xlsm')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Controle\\Controle.xlsm')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\5-PROCESSO PROJETOS\\REGISTROS\\Controle - AT.xlsm')
     atualizar_Planilhas('Z:\\PUBLICO\Araujo\\Planilhas-Indicadores\\SCS vs CARTEIRAS.xlsx')
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\3-GESTÃO DA QUALIDADE\\REGISTROS\\Gráficos-IDs-PCP-2024 - IDs 04a 04b 13b.xlsx')
+    atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Gráficos-IDs-PCP-2024 - IDs 04a 04b 13b.xlsx')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Gráfico-ID-Produção-2024 - ID-02-01-10-2024.xlsx')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Graficos-IDs-Compras-2024 - IDs 09 13a 13c.xlsx')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Graficos-IDs-Engenharia-2024 - IDs10a 10b 11 12 e 14.xlsx')
+
+def bloquear_PC():
+    ctypes.windll.user32.LockWorkStation()
+
+def desligar_PC():
+    os.system("shutdown /s /t 10")
 
 titulo()
 
@@ -280,6 +265,8 @@ voltar_Arquivos()
 
 atualizar_Excel()
 
-finalizacao()
+# finalizacao()
 
-# os.system("shutdown /s /t 10")
+# bloquear_PC()
+
+desligar_PC()
