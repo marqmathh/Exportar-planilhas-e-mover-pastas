@@ -10,6 +10,8 @@ import win32com.client
 import os
 from pywinauto.application import Application
 import ctypes
+import tkinter as tk
+from tkinter import messagebox
 
 pyautogui.PAUSE = 1
 
@@ -154,20 +156,28 @@ def exporta_Nomus():
     exportar()
     mudar_Link('https://reports.nomus.com.br/open-view/751489003502944448',29) # Estoque - tempo real
     exportar_Diff()
+    mudar_Link('https://reports.nomus.com.br/open-view/751489003521923921',30) # qtde_estoque
+    exportar()
     time.sleep(60)
     navegador.quit()
 
 def salva_Arquivos():
-    caminho_Download()
+    pyautogui.press('winleft')
+    pyautogui.write('Downloads')
+    pyautogui.press('enter')
     time.sleep(0.5)
     pyautogui.hotkey('ctrl','a')
     pyautogui.hotkey('ctrl','x')
-    pyautogui.hotkey('ctrl','w')
-    caminho_publico()
+    pyautogui.press('winleft')
+    pyautogui.write('Z:\PUBLICO')
+    pyautogui.press('enter')
+    pyautogui.press('pgup')
+    pyautogui.press('enter')
     time.sleep(0.5)
     pyautogui.hotkey('ctrl','v')
-    time.sleep(0.5)
+    time.sleep(10)
     pyautogui.press('esc')
+    pyautogui.hotkey('ctrl','w')
     pyautogui.hotkey('ctrl','w')
     time.sleep(0.5)
 
@@ -185,6 +195,7 @@ def move_Arquivos():
     pyautogui.hotkey('ctrl','x')
     pyautogui.hotkey('ctrl','w')
     pyautogui.hotkey('ctrl','v')
+    time.sleep(10)
     pyautogui.hotkey('ctrl','w')
     time.sleep(0.5)
 
@@ -193,12 +204,12 @@ def voltar_Arquivos():
     time.sleep(0.5)
     pyautogui.hotkey('ctrl','a')
     pyautogui.hotkey('ctrl','x')
-    pyautogui.hotkey('ctrl','w')
     caminho_Download()
     time.sleep(0.5)
     pyautogui.hotkey('ctrl','v')
-    time.sleep(0.5)
+    time.sleep(10)
     pyautogui.press('esc')
+    pyautogui.hotkey('ctrl','w')
     pyautogui.hotkey('ctrl','w')
     time.sleep(0.5)
 
@@ -231,18 +242,31 @@ def atualizar_Planilhas(local_Planilha):
         excel.Quit()
 
 def atualizar_Excel():
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Banco de dados\\Banco de dados - Lead.xlsx')
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Lead time - Familia.xlsx')
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Fechamento de estoque\\Monitoramento de estoque.xlsx')
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\Controle de inventários.xlsx')
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\TB-06_AvalProvedoresExternos-Rev05.xlsx')
+    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Banco de dados\\Banco de dados - Lead.xlsx')
+    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\Lead time\\Lead time - Familia.xlsx')
+    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\Sistema\\planilhas\\Lead time - Familia.xlsx')
+    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\Controle de inventários.xlsx')
+    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\TB-06_AvalProvedoresExternos-Rev05.xlsx')
     atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\9 - PPCP\\.PCP\\Controle\\Controle.xlsm')
-    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\5-PROCESSO PROJETOS\\REGISTROS\\Controle - AT.xlsm')
+    # atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\5-PROCESSO PROJETOS\\REGISTROS\\Controle - AT.xlsm')
     atualizar_Planilhas('Z:\\PUBLICO\Araujo\\Planilhas-Indicadores\\SCS vs CARTEIRAS.xlsx')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Gráficos-IDs-PCP-2024 - IDs 04a 04b 13b.xlsx')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Gráfico-ID-Produção-2024 - ID-02-01-10-2024.xlsx')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Graficos-IDs-Compras-2024 - IDs 09 13a 13c.xlsx')
+    # atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Graficos-IDs-Engenharia-2024 - IDs10a 10b 11 12 e 14.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\\Sistema\\planilhas\\Lead time - Familia.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\\Sistema\\planilhas\\Monitoramento de estoque.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\\Sistema\\planilhas\\OP_porcentagem.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\\Sistema\\planilhas\\Vendas.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\\Sistema\\planilhas\\Indicadores.xlsx')
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\12-SISTEMA\\Sistema\\planilhas\\Setores de estoque.xlsx')
+
+def atualizar_engenharia():
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\5-PROCESSO PROJETOS\\REGISTROS\\Controle - AT.xlsm')
     atualizar_Planilhas('Z:\\PUBLICO\\Araujo\\Planilhas-Indicadores\\Graficos-IDs-Engenharia-2024 - IDs10a 10b 11 12 e 14.xlsx')
+
+def atualizar_compras():
+    atualizar_Planilhas('Z:\\ISO 9000 - SGQ\\6-PROCESSO SUPRIMENTOS\\REGISTROS\\TB-06_AvalProvedoresExternos-Rev05.xlsx')
 
 def bloquear_PC():
     ctypes.windll.user32.LockWorkStation()
@@ -250,23 +274,115 @@ def bloquear_PC():
 def desligar_PC():
     os.system("shutdown /s /t 10")
 
-titulo()
+def suspender_PC():
+    os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
 
-salva_Arquivos()
+def atualizar_e_avisar():
+    salva_Arquivos()
+    time.sleep(5)
+    exporta_Nomus()
+    time.sleep(5)
+    move_Arquivos()
+    time.sleep(5)
+    voltar_Arquivos()
+    time.sleep(5)
+    atualizar_Excel()
+    time.sleep(5)
+    finalizacao()
+
+def atualizar_e_bloquear():
+    salva_Arquivos()
+    time.sleep(5)
+    exporta_Nomus()
+    time.sleep(5)
+    move_Arquivos()
+    time.sleep(5)
+    voltar_Arquivos()
+    time.sleep(5)
+    atualizar_Excel()
+    time.sleep(5)
+    bloquear_PC()
+
+def atualizar_e_suspender():
+    salva_Arquivos()
+    time.sleep(5)
+    exporta_Nomus()
+    time.sleep(5)
+    move_Arquivos()
+    time.sleep(5)
+    voltar_Arquivos()
+    time.sleep(5)
+    atualizar_Excel()
+    time.sleep(5)
+    suspender_PC()
+
+def atualizar_e_desligar():
+    salva_Arquivos()
+    time.sleep(5)
+    exporta_Nomus()
+    time.sleep(5)
+    move_Arquivos()
+    time.sleep(5)
+    voltar_Arquivos()
+    time.sleep(5)
+    atualizar_Excel()
+    time.sleep(5)
+    desligar_PC()
+
+def readme():
+    pyautogui.alert("""
+As primeiras opções que começam com "Atualizar" ela atulualiza e faz algo com o seu computador, ideal para atualizar no final do expediente ou no horario de almoço
+As sequencias são passo a passo caso a pessoa queira executar tudo um por um""")
+    
+def criar_interface():
+    janela = tk.Tk()
+    janela.title("Automação de Processos")
+    janela.geometry("400x550")
+      
+    tk.Label(janela, text="Selecione a ação desejada:", font=("Arial", 14)).pack(pady=10)
+
+    tk.Button(janela, text="0 - Instruções", command=readme, width=30, bg="blue", fg="white").pack(pady=5)
+    tk.Button(janela, text="Atualizar e Avisar", command=atualizar_e_avisar, width=30, bg="green", fg="white").pack(pady=5)
+    tk.Button(janela, text="Atualizar e Bloquear", command=atualizar_e_bloquear, width=30, bg="green", fg="white").pack(pady=5)
+    tk.Button(janela, text="Atualizar e Suspender", command=atualizar_e_suspender, width=30, bg="green", fg="white").pack(pady=5)
+    tk.Button(janela, text="Atualizar e Desligar", command=atualizar_e_desligar, width=30, bg="green", fg="white").pack(pady=5)
+    tk.Button(janela, text="1° - Salva os arquivos", command=salva_Arquivos, width=30, bg="yellow", fg="black").pack(pady=5)
+    tk.Button(janela, text="2° - Baixar planilhas", command=exporta_Nomus, width=30, bg="yellow", fg="black").pack(pady=5)
+    tk.Button(janela, text="3° - Mover arquivos", command=move_Arquivos, width=30, bg="yellow", fg="black").pack(pady=5)
+    tk.Button(janela, text="4° - Voltar arquivos", command=voltar_Arquivos, width=30, bg="yellow", fg="black").pack(pady=5)
+    tk.Button(janela, text="5° - Atualizar planilhas/indicadores", command=atualizar_Excel, width=30, bg="yellow", fg="black").pack(pady=5)
+    tk.Button(janela, text="6° - Atualizar engenharia", command=atualizar_engenharia, width=30, bg="yellow", fg="black").pack(pady=5)
+    tk.Button(janela, text="7° - Atualizar TB-06", command=atualizar_compras, width=30, bg="yellow", fg="black").pack(pady=5)
+
+    tk.Button(janela, text="Sair", command=janela.quit, bg="red", fg="white", width=30).pack(pady=10)
+
+    janela.mainloop()
+
+# titulo()
+
+# salva_Arquivos()
 
 servico = Service(ChromeDriverManager().install())
 navegador = webdriver.Chrome(service=servico)
 
-exporta_Nomus()
+criar_interface()
 
-move_Arquivos()
 
-voltar_Arquivos()
+navegador.quit()
 
-atualizar_Excel()
+
+# exporta_Nomus()
+
+# move_Arquivos()
+
+# voltar_Arquivos()
+
+# atualizar_Excel()
 
 # finalizacao()
 
 # bloquear_PC()
 
-desligar_PC()
+# desligar_PC()
+
+# suspender_PC()
